@@ -46,9 +46,9 @@
           lo        (dec (nth start-pos 1))]
       (concat
         (map #(conj [hi] %) (range (inc lo) hi))
-        (map #(vec (cons % [hi])) (range hi lo -1))
+        (map #(cons % [hi]) (range hi lo -1))
         (map #(conj [lo] %) (range hi lo -1))
-        (map #(vec (cons % [lo])) (range lo (inc hi)))))))
+        (map #(cons % [lo]) (range lo (inc hi)))))))
 
 (defn- point-to-key
   [[x y]]
@@ -56,8 +56,9 @@
 
 (defn- cartesian-neighbors
   [[x y]]
-  (lazy-seq [ [(inc x) y] [(dec x) y] [x (inc y)] 
-              [x (dec y)] [(inc x) (inc y)] [(dec x) (dec y)]
+  (lazy-seq [ [(inc x) y] [(dec x) y] 
+              [x (inc y)] [x (dec y)] 
+              [(inc x) (inc y)] [(dec x) (dec y)]
               [(inc x) (dec y)] [(dec x) (inc y)] ]))
 
 (defn- sum-of-neighbors
@@ -76,9 +77,9 @@
   (loop [tm     (transient {(point-to-key [0 0]) 1}) 
          total  1
          points (mapcat identity (map spiral-points (iterate #(+ % 2) 3)))]
-    (let [sum  (sum-of-neighbors tm (first points))]
       (if (<= total 368078)
-        (recur (assoc! tm (point-to-key (first points)) sum)
-               sum
-               (rest points))
-        total))))
+        (let [sum  (sum-of-neighbors tm (first points))]
+          (recur (assoc! tm (point-to-key (first points)) sum)
+                 sum
+                 (rest points)))
+        total)))
