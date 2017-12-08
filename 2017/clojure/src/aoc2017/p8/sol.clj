@@ -4,12 +4,12 @@
 (def instructions (map #(re-seq #"[\w<>=!-]+" %) 
                        (split-lines (slurp "src/aoc2017/p8/input.txt"))))
 
-(defn to-fn [string]
-  (cond
-    (= string "!=") not=
-    (= string "dec") -
-    (= string "inc") +
-    :else (resolve (symbol string))))
+(defn to-fn [fn-string]
+  (case fn-string
+    "!=" not=
+    "dec" -
+    "inc" +
+    (resolve (symbol fn-string))))
 
 (defn execute-step 
   [[reg action-str action-val _ test-reg comp-str test-val] regs]
