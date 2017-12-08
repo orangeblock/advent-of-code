@@ -1,7 +1,7 @@
 (ns aoc2017.p8.sol
-  (:require [clojure.string :refer [split-lines]]))
+  (:require [clojure.string :refer [split split-lines]]))
 
-(def instructions (map #(re-seq #"[\w<>=!-]+" %) 
+(def instructions (map #(split % #" ")
                        (split-lines (slurp "src/aoc2017/p8/input.txt"))))
 
 (defn to-fn [fn-string]
