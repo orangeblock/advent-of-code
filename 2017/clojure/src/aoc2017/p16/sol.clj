@@ -36,4 +36,3 @@
 (defn part-two []
   (let [c (permutation-cycle init-state)]
     (s/join (nth c (mod 1000000000 (count c))))))
-  
