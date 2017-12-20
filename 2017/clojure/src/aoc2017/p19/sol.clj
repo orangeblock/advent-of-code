@@ -35,7 +35,7 @@
         (empty? valid-moves)
           ; reached the end of the maze
           [(join new-letters) moves]
-        (= \+ (get-in data cpos))
+        (= \+ cval)
           ; at a junction - there is only one valid move
           (recur (first valid-moves) cpos new-letters (inc moves))
         :else
