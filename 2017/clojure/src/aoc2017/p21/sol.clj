@@ -1,7 +1,7 @@
 (ns aoc2017.p21.sol
   (:require [clojure.string :refer [split-lines split]]))
 
-; No idea about actual efficient algorithm for this, so just a naive impelmenatation.
+; No idea about actual efficient algorithm for this, so just a naive implementation.
 ; Takes a while on part two.
 
 (defn flip-horizontal [grid] (mapv #(vec (reverse %)) grid))
