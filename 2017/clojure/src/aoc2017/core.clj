@@ -1,5 +1,5 @@
 (ns aoc2017.core
-  (:require [aoc2017.p24.sol :as p])
+  (:require [aoc2017.p25.sol :as p])
   (:gen-class))
 
 (defn -main
