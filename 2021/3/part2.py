@@ -32,8 +32,10 @@ def get_rating_vector(rating_type, vecs):
         curr_idx_midpoint = len(vs) / 2.0
         if rating_type == Rating.OXYGEN:
             curr_idx_target = 1 if vsum[curr_idx] >= curr_idx_midpoint else 0
-        else:
+        elif rating_type == Rating.CO2:
             curr_idx_target = 0 if vsum[curr_idx] >= curr_idx_midpoint else 1
+        else:
+            raise Exception('invalid rating type: %d' % rating_type)
         # eliminate vectors that don't have the required number in current position
         vs = list(filter(lambda x : x[curr_idx] == curr_idx_target, vs))
         curr_idx += 1
